@@ -19,12 +19,16 @@ mongoose.connect("mongodb://localhost/ScrapeScrapeScrapin");
 //Routes
 
 app.get("/scrape", function(req, res)	{
-	axios.get("http://www.nytimes.com").then(function(response)	{
-		const $ = cheerio.load(html);
+	axios.get("http://www.nytimes.com/").then(function(response)	{
+		
+		var $ = cheerio.load(response.data);
+		
 		$("h2.story-heading").each(function(i, element)	{
 			var result = {};
-			const link = $(element).children().attr("href");
-			const title = $(element).children().text();
+			result.title = $(this).children().text();
+			result.link = $(this).children().attr("href");
+			// const link = $(element).children().attr("href");
+			// const title = $(element).children().text();
 
 			db.Article.create(result)
 				.then(function(dbArticle)	{

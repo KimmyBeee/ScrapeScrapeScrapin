@@ -1,0 +1,9 @@
+body {
+	background-color: #BDE4C3;
+}
+
+.jumbotron {
+	background-color: #ffe100;
+	background-image: url("/images/jumboPattern.jpg");
+	background-size: cover;
+}
